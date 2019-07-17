@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EcommerceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="App_registration">
+          <Key>
+            <PropertyRef Name="registration_no" />
+          </Key>
+          <Property Name="registration_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="First_Name" Type="varchar" MaxLength="100" />
+          <Property Name="Last_Name" Type="varchar" MaxLength="100" />
+          <Property Name="Email_Address" Type="varchar" MaxLength="100" />
+          <Property Name="MobileNo" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="App_users">
+          <Key>
+            <PropertyRef Name="user_no" />
+          </Key>
+          <Property Name="user_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="100" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+          <Property Name="Registration_no" Type="int" />
+        </EntityType>
+        <Association Name="FK__App_users__Regis__25869641">
+          <End Role="App_registration" Type="Self.App_registration" Multiplicity="0..1" />
+          <End Role="App_users" Type="Self.App_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App_registration">
+              <PropertyRef Name="registration_no" />
+            </Principal>
+            <Dependent Role="App_users">
+              <PropertyRef Name="Registration_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EcommerceModelStoreContainer">
+          <EntitySet Name="App_registration" EntityType="Self.App_registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="App_users" EntityType="Self.App_users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__App_users__Regis__25869641" Association="Self.FK__App_users__Regis__25869641">
+            <End Role="App_registration" EntitySet="App_registration" />
+            <End Role="App_users" EntitySet="App_users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EcommerceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EcommerceEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="App_registration" EntityType="EcommerceModel.App_registration" />
+          <EntitySet Name="App_users" EntityType="EcommerceModel.App_users" />
+          <AssociationSet Name="FK__App_users__Regis__25869641" Association="EcommerceModel.FK__App_users__Regis__25869641">
+            <End Role="App_registration" EntitySet="App_registration" />
+            <End Role="App_users" EntitySet="App_users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="App_registration">
+          <Key>
+            <PropertyRef Name="registration_no" />
+          </Key>
+          <Property Name="registration_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="First_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email_Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="App_users" Relationship="EcommerceModel.FK__App_users__Regis__25869641" FromRole="App_registration" ToRole="App_users" />
+        </EntityType>
+        <EntityType Name="App_users">
+          <Key>
+            <PropertyRef Name="user_no" />
+          </Key>
+          <Property Name="user_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Registration_no" Type="Int32" />
+          <NavigationProperty Name="App_registration" Relationship="EcommerceModel.FK__App_users__Regis__25869641" FromRole="App_users" ToRole="App_registration" />
+        </EntityType>
+        <Association Name="FK__App_users__Regis__25869641">
+          <End Type="EcommerceModel.App_registration" Role="App_registration" Multiplicity="0..1" />
+          <End Type="EcommerceModel.App_users" Role="App_users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App_registration">
+              <PropertyRef Name="registration_no" />
+            </Principal>
+            <Dependent Role="App_users">
+              <PropertyRef Name="Registration_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EcommerceModelStoreContainer" CdmEntityContainer="EcommerceEntities" >
+          <EntitySetMapping Name="App_registration">
+            <EntityTypeMapping TypeName="EcommerceModel.App_registration">
+              <MappingFragment StoreEntitySet="App_registration">
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Email_Address" ColumnName="Email_Address" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="registration_no" ColumnName="registration_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="App_users">
+            <EntityTypeMapping TypeName="EcommerceModel.App_users">
+              <MappingFragment StoreEntitySet="App_users">
+                <ScalarProperty Name="Registration_no" ColumnName="Registration_no" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="user_no" ColumnName="user_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

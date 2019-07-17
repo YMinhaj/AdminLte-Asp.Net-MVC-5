@@ -1,7 +1,9 @@
-﻿@{
+﻿@model Models.LoginModel
+@{
     ViewBag.Title = "Login";
     Layout = "";
 }
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,13 +39,21 @@
         <!-- /.login-logo -->
         <div class="login-box-body">
             <p class="login-box-msg">Sign in to start your session</p>
-            <form action="@Url.Action("Dashboardv2", "Dashboard")" method="post">
+@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "loginForm" }))
+    {
+    @Html.ValidationSummary(true);
+                @*<form action="@Url.Action("LoginAuth", "Example")" method="post">*@
                 <div class="form-group has-feedback">
-                    <input type="email" class="form-control" placeholder="Email">
+                  @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control", @name = "username", @placeholder = "username" } })
+                @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger " })
+                
+                    @*<input type="email" class="form-control" placeholder="Email">*@
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="password" class="form-control" placeholder="Password">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @name = "password", @placeholder = "password" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger " })
+                    @*<input type="password" class="form-control" placeholder="Password">*@
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
                 <div class="row">
@@ -56,11 +66,11 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                        <button type="submit" id="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
                     </div>
                     <!-- /.col -->
                 </div>
-            </form>
+            @*</form>*@
             <div class="social-auth-links text-center">
                 <p>- OR -</p>
                 <a href="#" class="btn btn-block btn-social btn-facebook btn-flat">
@@ -75,9 +85,11 @@
             <!-- /.social-auth-links -->
             <a href="#">I forgot my password</a><br>
             <a href="@Url.Action("Register", "Examples")" class="text-center">Register a new membership</a>
+}
         </div>
         <!-- /.login-box-body -->
     </div>
+
     <!-- /.login-box -->
     <!-- jQuery 3 -->
     <script src="~/Scripts/adminlte/components/jquery/dist/jquery.min.js"></script>
@@ -96,3 +108,4 @@
     </script>
 </body>
 </html>
+<script src="~/AreaScripts/jquery-Login-min.js"></script>
