@@ -4227,6 +4227,7 @@
     <Content Include="Scripts\adminlte\components\ckeditor\skins\moono-lisa\readme.md" />
     <Content Include="Scripts\adminlte\components\ckeditor\skins\moono\readme.md" />
     <Content Include="README.md" />
+    <Content Include="Views\Examples\TestView.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

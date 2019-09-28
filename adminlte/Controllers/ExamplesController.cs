@@ -81,5 +81,9 @@ namespace adminlte.Controllers
         {
             return View();
         }
+        public ActionResult TestView()
+        {
+            return View();
+        }
     }
 }
